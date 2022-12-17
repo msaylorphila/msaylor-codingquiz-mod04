@@ -7,13 +7,14 @@ var questionIndex = 0
 var responses = document.querySelectorAll(".response")
 var startButton = document.getElementById("start-game")
 var score = 0
-var results = document.getElementById("results")
+var resultsMessage = document.getElementById("results-message")
+var resultsScore = document.getElementById("results-score")
 var saveScore = document.getElementById("initials")
 var submit = document.getElementById("submit")
 var initialsLoc = localStorage.getItem("initialSet")
 var scoreLoc = localStorage.getItem("score")
 var initialsVal = document.getElementById("initialsVal")
-var retry = document.getElementById("retry")
+
 
 var questions = [{
     question: "How do you call a function named myFunction?",
@@ -118,22 +119,25 @@ function stopQuiz() {
 
 
 function submitResults() {
-    console.log(saveScore)
     var inputVal = saveScore.value
-    console.log(inputVal)
     localStorage.setItem("initialSet", inputVal);
     localStorage.setItem("score", score)
-   
+    displayScores()
+    initialsVal.classList.add('hide')
 }
 
-function displayScores() {
+function displayScores() { 
+    results.classList.remove('hide')
+    resultsMessage.textContent = ("Thank you for playing " + initialsLoc + "!")
+    resultsScore.textContent = ("You scored " + scoreLoc + "!")
+    
 
 }
 
 
 submit.onclick = submitResults
 
-retry.onclick = startQuiz
+
 
 
 startButton.onclick = startQuiz
