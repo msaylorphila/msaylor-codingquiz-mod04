@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,23 +8,34 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
 </head>
+
 <body>
     <header>
         <h1 id="javascript-quiz">Welcome to the JavaScript Beginner Quiz!</h1>
         <button id="start-game">Start Game</button>
     </header>
     <h2 id="timer" style="text-align:right;"></h2>
-    <button id="Submit">Submit</button>
-    <button id="next-question">Next Question</button>
-    <button id="previous-question">Previous Question</button>
-
+    <div id="quiz-here">
+        <div id="question"></div>
+        <div id="response-area">
+            <div class="response" id="r1"></div>
+            <div class="response" id="r2"></div>
+            <div class="response" id="r3"></div>
+            <div class="response" id="r4"></div>
+        </div>
+    </div>
+    <div id="initialsVal">
+    <h2>Enter your initials to save your score!</h2>
+    <input type="text" id="initials" name="name" minlength="2" maxlength="4" size="10"/>
+    <button id="submit">Submit</button>
+    </div>
     <div id="results">
         <p id="results-message"></p>
         <p id="results-score"></p>
-        <button id="retry">Retry</button>
     </div>
-    
-    
-<script src="./assets/js/script.js"></script>
+
+    <button id="retry">Retry</button>
+    <script src="./assets/js/script.js"></script>
 </body>
+
 </html>
