@@ -7,14 +7,11 @@ var questionIndex = 0
 var responses = document.querySelectorAll(".response")
 var startButton = document.getElementById("start-game")
 var score = 0
-var resultsMessage = document.getElementById("results-message")
-var resultsScore = document.getElementById("results-score")
 var saveScore = document.getElementById("initials")
 var submit = document.getElementById("submit")
-var initialsLoc = localStorage.getItem("initialSet")
-var scoreLoc = localStorage.getItem("score")
 var initialsVal = document.getElementById("initialsVal")
-
+var scoresTable = document.getElementById('results')
+var scores = fetchScores()
 
 var questions = [{
     question: "How do you call a function named myFunction?",
@@ -43,27 +40,37 @@ var questions = [{
 }]
 
 initialsVal.classList.add('hide')
+scoresTable.classList.add('hide')
 
-// WHEN I answer a question 
-// THEN I am presented with another question *
-// WHEN I answer a question incorrectly 
-// THEN time is subtracted from the clock *
-// WHEN all questions are answered or the timer reaches 0
-// THEN the game is over
-// WHEN the game is over*
-// THEN I can save my initials and my score
+// Initialize or fetch scores
+function fetchScores() {
+    if ( localStorage.getItem('scores') === null ) {
+        return []
+    } else {
+        return JSON.parse(localStorage.getItem("scores"))
+    }
+}
 
 function startQuiz() {
+    // Reset the quiz
     questionIndex = 0;
     score = 0;
+    saveScore.value = "";
+    scoresTable.textContent = ''
+    scores = fetchScores();
+
     startButton.classList.add("hide")
     quizEl.classList.remove('hide')
-    results.classList.add('hide')
+    scoresTable.classList.add('hide')
+    initialsVal.classList.add('hide')
+
     startTimer()
     writeQuestion(questionIndex)
 }
 
 function startTimer() {
+    secondsLeft = 60;
+    timerEl.textContent = secondsLeft + " seconds left until end of quiz";
     var timerInterval = setInterval(function timerFunction() {
         secondsLeft--;
         timerEl.textContent = secondsLeft + " seconds left until end of quiz";
@@ -89,10 +96,8 @@ function writeQuestion(index) {
 function selectOption(value, question) {
     if (value === question.choices.correct){
         score++
-        console.log(value)
     } else {
         secondsLeft -= 5
-        console.log("hah you dumb bitch")
     }
     console.log("score: " + score.toString())
     questionIndex++;
@@ -108,36 +113,45 @@ function selectOption(value, question) {
 function stopQuiz() {
     quizEl.classList.add('hide')
     startButton.classList.remove('hide')
-    results.classList.remove('hide')
     initialsVal.classList.remove('hide')
     timerEl.textContent = "Quiz ended"
-
-
-    // reset 
-   
 }
 
 
 function submitResults() {
-    var inputVal = saveScore.value
-    localStorage.setItem("initialSet", inputVal);
-    localStorage.setItem("score", score)
-    displayScores()
+    var initials = saveScore.value
+    quizResult = {"initials": initials, "score": score}
+    scores.push(quizResult)
+    localStorage.setItem("scores", JSON.stringify(scores))
     initialsVal.classList.add('hide')
+    displayScores()
 }
 
 function displayScores() { 
-    results.classList.remove('hide')
-    resultsMessage.textContent = ("Thank you for playing " + initialsLoc + "!")
-    resultsScore.textContent = ("You scored " + scoreLoc + "!")
-    
-
+    var quizScores = JSON.parse(localStorage.getItem('scores'))
+    scoresTable.classList.remove('hide')
+    var table = document.createElement('table');
+    for( var i = 0; i < quizScores.length; i++ ) {
+        var score = quizScores[i];
+        if(i === 0 ) {
+            addTableHeaders(table, Object.keys(score));
+        }
+        var row = table.insertRow();
+        Object.keys(score).forEach(function(k) {
+            console.log(k);
+            var cell = row.insertCell();
+            cell.appendChild(document.createTextNode(score[k]));
+        })
+    }
+    scoresTable.appendChild(table);
 }
 
-
-submit.onclick = submitResults
-
-
-
-
+function addTableHeaders(table, keys) {
+    var row = table.insertRow();
+    for( var i = 0; i < keys.length; i++ ) {
+      var cell = row.insertCell();
+      cell.appendChild(document.createTextNode(keys[i]));
+    }
+}
 startButton.onclick = startQuiz
+submit.onclick = submitResults
