@@ -1,35 +1,36 @@
+/* aligning the quiz content to center it */
 body {
     text-align: center;
 }
-
+/* this class is giving me the ability to hide different sections as a user clicks through the quiz */
 .hide {
     display: none;
 }
-
+/* setting the timer color */
 #timer {
     color: blueviolet
 }
-
+/* setting the start button color */
 #start-game {
     background-color: blueviolet;
 }
-
+/* setting the question color and font size */
 #question {
     color: blue;
     font-size: 30px;
 }
-
+/* setting the answer color and font size */
 .response {
     color: #384663;
     font-size: 20px;
     padding: 1%;
 
 }
-
+/* setting the submit button color */
 #submit {
     color:blueviolet;
 }   
-
+/* changing the font size and display of the scoreboard table */
 #results {
     font-size: 20px;
     padding: 1%;
