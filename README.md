@@ -10,6 +10,9 @@ In this module we designed a quiz using web APIs in javascript. With the knowled
 
 n/a
 
+## Usage
+
+When a user clicks on the start game button they are met with a multiple choice question and a timer. When a question is answered correctly they are directed to the next question. When a question is answered incorrectly the timer is docked by 5 seconds and they are met with the next question. When all questions are answered the timer drops to 0 and the game is over. If the timer drops to 0 before all questions are answered the game ends. When the game ends the user is prompted to enter their initials and their score and initials are saved to local storage and added to a scoreboard.
 
 ## License
 
