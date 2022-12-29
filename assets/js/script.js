@@ -17,25 +17,25 @@ var questions = [{
     question: "How do you call a function named myFunction?",
     choices: {
         correct: "myFunction()",
-        responses: ["myFunction()", "!myfunction", "myFunction", ".myFunction"]
+        responses: ["1. myFunction()", "2. !myfunction", "3. myFunction", "4. .myFunction"]
     }
 }, {
     question:"How would we write that i is strictly equal to five?",
     choices: {
         correct: "i === 5",
-        responses: ["i = 5", "i === 5", "I < 5", "i != 5"]
+        responses: ["1. i = 5", "2. i === 5", "3. I < 5", "4. i != 5"]
     }
 }, {
     question:"How would we link our JavaScript file to our HTML file?",
     choices: {
         correct: "<script>",
-        responses: ["<js>", "<javaScript>", "<script>", "<script href>"]
+        responses: ["1. <js>", "2. <javaScript>", "3. <script>", "4. <script href>"]
     }
 }, {
     question:"Is JavaScript case sensitive?",
     choices: {
         correct: "Yes",
-        responses: ["No", "Yes"]
+        responses: ["1. No", "2. Yes"]
     }
 }]
 
